@@ -14,7 +14,7 @@
     },
     "require": {
         "php": ">=5.3.23",
-        "zendframework/zend-json": "self.version"
+        "zendframework/zend-json": "~2.4"
     },
     "suggest": {
         "zendframework/zend-http": "Allows use of Zend\\Http\\Client to check version information",
