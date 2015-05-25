@@ -1,7 +1,7 @@
 # zend-version
 
 [![Build Status](https://secure.travis-ci.org/zendframework/zend-version.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-version)
-[![Coverage Status](https://coveralls.io/repos/zendframework/zend-version/badge.svg?branch=master)](https://coveralls.io/r/zendframework/zend-version)
+[![Coverage Status](https://coveralls.io/repos/zendframework/zend-version/badge.svg?branch=master)](https://coveralls.io/r/zendframework/zend-version?branch=master)
 
 `Zend\Version` provides a class constant `Zend\Version\Version::VERSION` that
 contains a string identifying the version number of your Zend Framework
