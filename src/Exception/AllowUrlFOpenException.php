@@ -11,15 +11,18 @@ namespace Zend\Version\Exception;
 
 use ErrorException;
 
+/**
+ * Announces an error with the allow_url_fopen configuration setting
+ */
 class AllowUrlFOpenException extends ErrorException
 {
     /**
      * @var string
      */
-    private $messagePattern = 'allow_url_fopen is not set, and no Zend\Http\Client ' .
-                              'was passed. You must either set allow_url_fopen in your ' .
-                              'PHP configuration or pass a configured Zend\Http\Client ' .
-                              'as the first argument to %s::getLatestVersion.';
+    const PATTERN = 'allow_url_fopen is not set, and no Zend\Http\Client ' .
+                    'was passed. You must either set allow_url_fopen in your ' .
+                    'PHP configuration or pass a configured Zend\Http\Client ' .
+                    'as the first argument to %s::getLatestVersion.';
     
     /**
      * Constructor
@@ -30,7 +33,7 @@ class AllowUrlFOpenException extends ErrorException
      */
     public function __construct($className, $fileName, $lineNumber)
     {
-        $message = sprintf($this->messagePattern, $className);
+        $message = sprintf(static::PATTERN, $className);
         parent::__construct($message, 0, E_USER_WARNING, $fileName, $lineNumber);
     }
 }

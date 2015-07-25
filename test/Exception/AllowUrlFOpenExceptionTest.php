@@ -28,16 +28,15 @@ class AllowUrlFOpenExceptionTest extends TestCase
         $this->assertInstanceOf('ErrorException', $mock);
     }
 
+    public function testClassHasPatternConstant()
+    {
+        $this->assertInternalType('string', AllowUrlFOpenException::PATTERN);
+    }
+
     public function testMessageUsesClassName()
     {
         $subject = new AllowUrlFOpenException(static::class, __FILE__, __LINE__);
-        $message = sprintf(
-            'allow_url_fopen is not set, and no Zend\Http\Client ' .
-            'was passed. You must either set allow_url_fopen in your ' .
-            'PHP configuration or pass a configured Zend\Http\Client ' .
-            'as the first argument to %s::getLatestVersion.',
-            static::class
-        );
+        $message = sprintf(AllowUrlFOpenException::PATTERN, static::class);
         $this->assertSame($message, $subject->getMessage());
     }
 
