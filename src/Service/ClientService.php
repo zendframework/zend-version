@@ -38,8 +38,8 @@ class ClientService extends AbstractService
         $this->client->setRequest($request);
         $response = $this->client->send();
 
-        if ($response->isSuccess()) {
-            return $response->getBody();
-        }
+        return ($response->isSuccess())
+            ? $response->getBody()
+            : null;
     }
 }

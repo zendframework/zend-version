@@ -25,7 +25,7 @@ class ClientServiceTest extends TestCase
     public function testGetLatestReturnsResponseBody()
     {
         if (!getenv('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
-            $this->markTestSkipped('Version online tests are not enabled');
+            $this->markTestSkipped('Online tests are not enabled');
         }
         if (!extension_loaded('openssl')) {
             $this->markTestSkipped('This test requires openssl extension to be enabled in PHP');
