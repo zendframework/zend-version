@@ -28,34 +28,26 @@ class AllowUrlFOpenExceptionTest extends TestCase
         $this->assertInstanceOf('ErrorException', $mock);
     }
 
-    public function testClassHasPatternConstant()
+    public function testClassHasDefaultMessage()
     {
-        $this->assertInternalType('string', AllowUrlFOpenException::PATTERN);
+        $this->assertInternalType('string', AllowUrlFOpenException::DEFAULT_MESSAGE);
     }
 
-    public function testMessageUsesClassName()
+    public function testMessageUsesDefaultMessage()
     {
-        $subject = new AllowUrlFOpenException(static::class, __FILE__, __LINE__);
-        $message = sprintf(AllowUrlFOpenException::PATTERN, static::class);
-        $this->assertSame($message, $subject->getMessage());
+        $subject = new AllowUrlFOpenException();
+        $this->assertSame(AllowUrlFOpenException::DEFAULT_MESSAGE, $subject->getMessage());
     }
 
-    public function testGetFileReturnsFilename()
+    public function testGetCodeReturnsDefault()
     {
-        $subject = new AllowUrlFOpenException(static::class, __FILE__, __LINE__);
-        $this->assertSame(__FILE__, $subject->getFile());
-    }
-
-    public function testGetLineReturnsLinenumber()
-    {
-        $line    = __LINE__;
-        $subject = new AllowUrlFOpenException(static::class, __FILE__, $line);
-        $this->assertSame($line, $subject->getLine());
+        $subject = new AllowUrlFOpenException();
+        $this->assertSame(0, $subject->getCode());
     }
 
     public function testGetSeverityReturnsUserWarning()
     {
-        $subject = new AllowUrlFOpenException(static::class, __FILE__, __LINE__);
+        $subject = new AllowUrlFOpenException();
         $this->assertSame(E_USER_WARNING, $subject->getSeverity());
     }
 }
