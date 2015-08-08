@@ -46,7 +46,7 @@ final class FrameworkService extends AbstractService
         if (null === $this->service) {
             $this->service = (null === $this->client)
                 ? new StreamService($this->endpoint)
-                : new ClientService($this->client, $this->endpoint);
+                : new ClientService($this->endpoint, $this->client);
         }
         return $this->service;
     }

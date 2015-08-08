@@ -34,7 +34,7 @@ class ClientServiceTest extends TestCase
         $client = new Client(self::ENDPOINT, [
             'sslverifypeer' => false,
         ]);
-        $service = new ClientService($client, self::ENDPOINT);
+        $service = new ClientService(self::ENDPOINT, $client);
         $this->assertInternalType("string", $service->getLatest());
     }
 }

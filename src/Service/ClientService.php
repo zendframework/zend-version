@@ -17,10 +17,10 @@ class ClientService extends AbstractService
 {
     protected $client;
 
-    public function __construct(Client $client, $endpoint)
+    public function __construct($endpoint, Client $client)
     {
-        $this->client   = $client;
         $this->endpoint = (string) $endpoint;
+        $this->client   = $client;
     }
 
     public function getLatest()
