@@ -24,7 +24,7 @@ class InvalidEndpointException extends InvalidArgumentException
     /**
      * Constructor
      * 
-     * @param string $endpoint An invalid version string
+     * @param string $endpoint An invalid endpoint string
      */
     public function __construct($endpoint)
     {
