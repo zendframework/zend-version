@@ -20,7 +20,7 @@ class StreamServiceTest extends TestCase
     {
         $this->assertTrue(class_exists("Zend\Version\Service\StreamService"));
     }
-
+    
     public function testConstructorTestsAllowUrlFOpen()
     {
         if (!getenv('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
@@ -34,7 +34,7 @@ class StreamServiceTest extends TestCase
         $service = new StreamService(self::ENDPOINT);
     }
 
-    public function testGetLatestReturnsResponseBody()
+    public function testGetLatestReturnsVersion()
     {
         if (!getenv('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
             $this->markTestSkipped('Online tests are not enabled');
@@ -44,6 +44,6 @@ class StreamServiceTest extends TestCase
         }
 
         $service = new StreamService(self::ENDPOINT);
-        $this->assertInternalType("string", $service->getLatest());
+        $this->assertInstanceOf("Zend\Version\Version", $service->getLatest());
     }
 }

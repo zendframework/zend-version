@@ -9,17 +9,56 @@
 
 namespace Zend\Version\Service;
 
+use Zend\Version\Exception\InvalidFormatException;
+use Zend\Version\Version;
+
 abstract class AbstractService implements ServiceInterface
 {
+    /**
+     * @var string
+     */
     protected $endpoint;
 
+    /**
+     * @var \Zend\Version\Version
+     */
     protected $latest;
 
+    /**
+     * Retrieve the latest version.
+     * 
+     * @return \Zend\Version\Version
+     */
+    public function getLatest()
+    {
+        if (null === $this->latest && $response = $this->loadLatest()) {
+            $this->latest = new Version($response);
+        }
+        return $this->latest;
+    }
+
+    /**
+     * Compare a version against the latest version.
+     * 
+     * @param  string $version A semantic version string e.g. '5.0.34-beta'
+     * @return bool
+     * @throws \Zend\Version\Exception\InvalidFormatException when the version is not semantic
+     */
     public function isLatest($version)
     {
+        if (! Version::validate($version)) {
+            throw new InvalidFormatException($version);
+        }
         if (! $latest = $this->getLatest()) {
             return true;
         }
-        return version_compare((string) $version, (string) $latest, '>=');
+        return $latest->compareTo($version);
     }
+
+    /**
+     * Load the latest version string from the endpoint
+     *
+     * @return string A semantic version string e.g. '5.0.34-beta'
+     */
+    abstract protected function loadLatest();
 }

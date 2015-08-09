@@ -10,6 +10,7 @@
 namespace Zend\Version\Service;
 
 use Zend\Http\Client;
+use Zend\Version;
 use Zend\Version\Exception\InvalidEndpointException;
 
 /**
@@ -17,13 +18,32 @@ use Zend\Version\Exception\InvalidEndpointException;
  */
 final class FrameworkService extends AbstractService
 {
+    use GithubServiceTrait;
+
+    /**@#+
+     * Endpoint constants
+     * @var string
+     */
     const ENDPOINT_GITHUB = 'https://api.github.com/repos/zendframework/zf2/git/refs/tags/release-';
     const ENDPOINT_ZEND   = 'http://framework.zend.com/api/zf-version?v=2';
+    /**@#- */
 
+    /**
+     * @var \Zend\Http\Client
+     */
     private $client;
 
+    /**
+     * @var \Zend\Version\Service\ServiceInterface
+     */
     private $service;
 
+    /**
+     * Constructor
+     *
+     * @param string      $endpoint a remote service endpoint url
+     * @param Client|null $client   optional http client
+     */
     public function __construct($endpoint = self::ENDPOINT_ZEND, Client $client = null)
     {
         if (! in_array($endpoint, [self::ENDPOINT_ZEND, self::ENDPOINT_GITHUB])) {
@@ -33,14 +53,38 @@ final class FrameworkService extends AbstractService
         $this->client   = $client;
     }
 
-    public function getLatest()
+    /**
+     * Fetch the current framework version
+     *
+     * @return \Zend\Version\Version
+     */
+    public function getCurrent()
     {
-        if (null === $this->latest) {
-            $this->latest = $this->getService()->getLatest();
-        }
-        return $this->latest;
+        return new Version\Version(Version\CURRENT);
     }
 
+    /**
+     * Fetches the version of the latest stable release.
+     * 
+     * If the endpoint is set to ENDPOINT_GITHUB, this will use the GitHub
+     * API (v3) and only returns refs that begin with * 'tags/release-'.
+     *
+     * @return string
+     */
+    protected function loadLatest()
+    {
+        $response = $this->getService()->loadLatest();
+        if ($this->endpoint === self::ENDPOINT_GITHUB) {
+            $response = $this->parseGithubResponse($response);
+        }
+        return $response;
+    }
+
+    /**
+     * Lazy-initialize a nested service.
+     *
+     * @return \Zend\Version\Service\AbstractService
+     */
     private function getService()
     {
         if (null === $this->service) {

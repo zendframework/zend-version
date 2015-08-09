@@ -22,7 +22,7 @@ class ClientServiceTest extends TestCase
         $this->assertTrue(class_exists("Zend\Version\Service\ClientService"));
     }
 
-    public function testGetLatestReturnsResponseBody()
+    public function testGetLatestReturnsVersion()
     {
         if (!getenv('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
             $this->markTestSkipped('Online tests are not enabled');
@@ -35,6 +35,6 @@ class ClientServiceTest extends TestCase
             'sslverifypeer' => false,
         ]);
         $service = new ClientService(self::ENDPOINT, $client);
-        $this->assertInternalType("string", $service->getLatest());
+        $this->assertInstanceOf("Zend\Version\Version", $service->getLatest());
     }
 }

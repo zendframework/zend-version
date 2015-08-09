@@ -9,8 +9,8 @@
 
 namespace Zend\Version\Service;
 
+use Zend\Version;
 use Zend\Version\Exception\AllowUrlFOpenException;
-use Zend\Version\Version;
 
 class StreamService extends AbstractService
 {
@@ -33,18 +33,10 @@ class StreamService extends AbstractService
         $this->userAgent = (string) $userAgent;
     }
 
-    public function getLatest()
-    {
-        if (null === $this->latest) {
-            $this->latest = $this->getStreamVersion();
-        }
-        return $this->latest;
-    }
-
-    protected function getStreamVersion()
+    protected function loadLatest()
     {
         $context = stream_context_create([
-            'http' => ['user_agent' => sprintf('%s/%s', $this->userAgent, Version::VERSION)],
+            'http' => ['user_agent' => sprintf('%s/%s', $this->userAgent, Version\CURRENT)],
         ]);
         return file_get_contents($this->endpoint, false, $context) ?: null;
     }

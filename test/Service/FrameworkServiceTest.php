@@ -11,6 +11,7 @@ namespace ZendTest\Version\Service;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Http\Client;
+use Zend\Version;
 use Zend\Version\Service\FrameworkService;
 
 class FrameworkServiceTest extends TestCase
@@ -26,9 +27,14 @@ class FrameworkServiceTest extends TestCase
         $service = new FrameworkService("foo");
     }
 
-    /**
-     * @ runInSeparateProcess
-     */
+    public function testGetCurrentReturnsCurrentVersion()
+    {
+        $service = new FrameworkService();
+        $version = $service->getCurrent();
+        $this->assertInstanceOf("Zend\Version\Version", $version);
+        $this->assertSame(Version\CURRENT, (string) $version);
+    }
+
     public function testGetLatestWithoutClient()
     {
         if (!getenv('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
@@ -39,12 +45,9 @@ class FrameworkServiceTest extends TestCase
         }
 
         $service = new FrameworkService();
-        $this->assertInternalType('string', $service->getLatest());
+        $this->assertInstanceOf('Zend\Version\Version', $service->getLatest());
     }
 
-    /**
-     * @ runInSeparateProcess
-     */
     public function testGetLatestWithClient()
     {
         if (!getenv('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
@@ -58,6 +61,6 @@ class FrameworkServiceTest extends TestCase
             'sslverifypeer' => false,
         ]);
         $service = new FrameworkService(FrameworkService::ENDPOINT_GITHUB, $client);
-        $this->assertInternalType('string', $service->getLatest());
+        $this->assertInstanceOf('Zend\Version\Version', $service->getLatest());
     }
 }

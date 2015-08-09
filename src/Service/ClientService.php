@@ -23,15 +23,7 @@ class ClientService extends AbstractService
         $this->client   = $client;
     }
 
-    public function getLatest()
-    {
-        if (null === $this->latest) {
-            $this->latest = $this->getApiResponse();
-        }
-        return $this->latest;
-    }
-
-    protected function getApiResponse()
+    protected function loadLatest()
     {
         $request = new Request();
         $request->setUri($this->endpoint);

@@ -13,7 +13,8 @@ use PHPUnit_Framework_TestCase as TestCase;
 
 class AbstractServiceTest extends TestCase
 {
-    const CLASSNAME = 'Zend\Version\Service\AbstractService';
+    const CLASSNAME   = 'Zend\Version\Service\AbstractService';
+    const DEV_VERSION = '0.0.1-dev';
 
     public function testClassExists()
     {
@@ -26,15 +27,22 @@ class AbstractServiceTest extends TestCase
         $this->assertInstanceOf('Zend\Version\Service\ServiceInterface', $service);
     }
 
+    public function testIsLatestValidatesVersion()
+    {
+        $this->setExpectedException('Zend\Version\Exception\InvalidFormatException');
+        $service = $this->getMockForAbstractClass(self::CLASSNAME);
+        $service->isLatest('foo');
+    }
+
     public function testIsLatestReturnsBool()
     {
         $service = $this->getMockForAbstractClass(self::CLASSNAME);
         $service
             ->expects($this->once())
-            ->method('getLatest')
+            ->method('loadLatest')
             ->will($this->returnValue('5.38.1'));
 
-        $this->assertFalse($service->isLatest('0.0.1-dev'));
+        $this->assertFalse($service->isLatest(self::DEV_VERSION));
     }
 
     public function testIsLatestReturnsTrueWithMissingLatest()
@@ -42,9 +50,9 @@ class AbstractServiceTest extends TestCase
         $service = $this->getMockForAbstractClass(self::CLASSNAME);
         $service
             ->expects($this->once())
-            ->method('getLatest')
+            ->method('loadLatest')
             ->will($this->returnValue(null));
 
-        $this->assertTrue($service->isLatest('0.0.1-dev'));
+        $this->assertTrue($service->isLatest(self::DEV_VERSION));
     }
 }

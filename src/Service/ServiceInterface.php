@@ -15,9 +15,9 @@ namespace Zend\Version\Service;
 interface ServiceInterface
 {
     /**
-     * Retrieve the latest version as a string.
+     * Retrieve the latest version.
      *
-     * @return string A semantic version string e.g. '5.0.34-beta'
+     * @return \Zend\Version\Version
      */
     public function getLatest();
 
