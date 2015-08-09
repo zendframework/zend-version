@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
+ * Zend Framework (http://framework.zend.com/).
  *
  * @link      http://github.com/zendframework/zend-version for the canonical source repository
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
@@ -22,8 +22,8 @@ class InvalidEndpointException extends InvalidArgumentException
     const PATTERN = 'Invalid service endpoint [%s]';
 
     /**
-     * Constructor
-     * 
+     * Constructor.
+     *
      * @param string $endpoint An invalid endpoint string
      */
     public function __construct($endpoint)

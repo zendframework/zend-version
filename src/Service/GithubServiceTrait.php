@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
+ * Zend Framework (http://framework.zend.com/).
  *
  * @link      http://github.com/zendframework/zend-version for the canonical source repository
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
@@ -20,7 +20,7 @@ trait GithubServiceTrait
 {
     /**
      * Parse the Github response.
-     * 
+     *
      * Because GitHub returns the refs in alphabetical order, we need to reduce
      * the array to a single value, comparing the version numbers with
      * version_compare().

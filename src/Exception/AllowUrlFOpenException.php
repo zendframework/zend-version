@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
+ * Zend Framework (http://framework.zend.com/).
  *
  * @link      http://github.com/zendframework/zend-version for the canonical source repository
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
@@ -12,7 +12,7 @@ namespace Zend\Version\Exception;
 use ErrorException;
 
 /**
- * Announces an error with the allow_url_fopen configuration setting
+ * Announces an error with the allow_url_fopen configuration setting.
  */
 class AllowUrlFOpenException extends ErrorException
 {
@@ -22,7 +22,7 @@ class AllowUrlFOpenException extends ErrorException
     const DEFAULT_MESSAGE = 'allow_url_fopen is not enabled';
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $message An error message
      * @param int    $code    An error code

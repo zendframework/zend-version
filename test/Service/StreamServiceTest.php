@@ -20,7 +20,7 @@ class StreamServiceTest extends TestCase
     {
         $this->assertTrue(class_exists("Zend\Version\Service\StreamService"));
     }
-    
+
     public function testConstructorTestsAllowUrlFOpen()
     {
         if (!getenv('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {

@@ -1,49 +1,50 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
+ * Zend Framework (http://framework.zend.com/).
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ *
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
 namespace Zend\Version;
 
 /**
- * Stores semantic version information for Zend Framework.
+ * Encapsulates semantic version information.
  */
 class Version
 {
     /**
-     * The current version alias
+     * The current version alias.
      *
-     * @var        string
+     * @var string
      * @deprecated 3.0.0  use Zend\Version\CURRENT instead
      */
     const VERSION = CURRENT;
-    
+
     /**
-     * The version string
+     * The version string.
      *
      * @var string
      */
     private $version;
-    
+
     /**
-     * The version parts
+     * The version parts.
      *
      * @var array
      */
     private $parts = [];
-    
+
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $version a semantic version string
      */
     public function __construct($version)
     {
-        if (! static::validate($version)) {
+        if (!static::validate($version)) {
             throw new Exception\InvalidFormatException($version);
         }
         $this->version = strtolower($version);
@@ -51,12 +52,12 @@ class Version
     }
 
     /**
-     * Splits the version string into its component parts
+     * Splits the version string into its component parts.
      *
      * If minor or patch components are missing, they will be added and
      * the version will be updated.
      *
-     * @return null
+     * @return void
      */
     private function parseVersionParts()
     {
@@ -68,7 +69,7 @@ class Version
             $this->version = implode('.', $this->parts);
         }
     }
-    
+
     /**
      * Is this a major version?
      *
@@ -78,7 +79,7 @@ class Version
     {
         return $this->parts[1] == '0' && $this->parts[2] == '0';
     }
-    
+
     /**
      * Is this a minor version?
      *
@@ -88,7 +89,7 @@ class Version
     {
         return $this->parts[1] != '0' && $this->parts[2] == '0';
     }
-    
+
     /**
      * Is this a patch version?
      *
@@ -108,9 +109,9 @@ class Version
     {
         return isset($this->parts[3]);
     }
-    
+
     /**
-     * Compare another version
+     * Compare another version.
      *
      * @link   http://php.net/manual/function.version-compare.php
      * @param  string $another  another version to compare
@@ -121,9 +122,9 @@ class Version
     {
         return version_compare((string) $another, $this->version, strtolower($operator));
     }
-    
+
     /**
-     * Convert to a semantic version string
+     * Convert to a semantic version string.
      *
      * @return string
      */
@@ -131,9 +132,9 @@ class Version
     {
         return $this->version;
     }
-    
+
     /**
-     * Validate a version string
+     * Validate a version string.
      *
      * @param  string $version a semantic version string
      * @return bool

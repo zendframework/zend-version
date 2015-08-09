@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
+ * Zend Framework (http://framework.zend.com/).
  *
  * @link      http://github.com/zendframework/zend-version for the canonical source repository
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
@@ -39,14 +39,14 @@ final class FrameworkService extends AbstractService
     private $service;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string      $endpoint a remote service endpoint url
      * @param Client|null $client   optional http client
      */
     public function __construct($endpoint = self::ENDPOINT_ZEND, Client $client = null)
     {
-        if (! in_array($endpoint, [self::ENDPOINT_ZEND, self::ENDPOINT_GITHUB])) {
+        if (!in_array($endpoint, [self::ENDPOINT_ZEND, self::ENDPOINT_GITHUB])) {
             throw new InvalidEndpointException($endpoint);
         }
         $this->endpoint = $endpoint;
@@ -54,7 +54,7 @@ final class FrameworkService extends AbstractService
     }
 
     /**
-     * Fetch the current framework version
+     * Fetch the current framework version.
      *
      * @return \Zend\Version\Version
      */
@@ -65,7 +65,7 @@ final class FrameworkService extends AbstractService
 
     /**
      * Fetches the version of the latest stable release.
-     * 
+     *
      * If the endpoint is set to ENDPOINT_GITHUB, this will use the GitHub
      * API (v3) and only returns refs that begin with * 'tags/release-'.
      *
@@ -77,6 +77,7 @@ final class FrameworkService extends AbstractService
         if ($this->endpoint === self::ENDPOINT_GITHUB) {
             $response = $this->parseGithubResponse($response);
         }
+
         return $response;
     }
 
@@ -92,6 +93,7 @@ final class FrameworkService extends AbstractService
                 ? new StreamService($this->endpoint)
                 : new ClientService($this->endpoint, $this->client);
         }
+
         return $this->service;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
+ * Zend Framework (http://framework.zend.com/).
  *
  * @link      http://github.com/zendframework/zend-version for the canonical source repository
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
@@ -13,7 +13,7 @@ use DomainException;
 
 /**
  * Announces an invalid version format.
- * 
+ *
  * @link http://semver.org
  */
 class InvalidFormatException extends DomainException
@@ -24,8 +24,8 @@ class InvalidFormatException extends DomainException
     const PATTERN = 'Invalid Format: [%s] is not a semantic version';
 
     /**
-     * Constructor
-     * 
+     * Constructor.
+     *
      * @param string $version An invalid version string
      */
     public function __construct($version)
