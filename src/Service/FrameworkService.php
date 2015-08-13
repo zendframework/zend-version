@@ -12,6 +12,7 @@ namespace Zend\Version\Service;
 use Zend\Http\Client;
 use Zend\Version;
 use Zend\Version\Exception\InvalidEndpointException;
+use Zend\Version\Exception\RecursionException;
 
 /**
  * Provides Zend Framework-specific version info.
@@ -29,28 +30,47 @@ final class FrameworkService extends AbstractService
     /**@#- */
 
     /**
-     * @var \Zend\Http\Client
-     */
-    private $client;
-
-    /**
      * @var \Zend\Version\Service\ServiceInterface
      */
     private $service;
 
     /**
+     * Use an internal StreamService
+     *
+     * @param  string $endpoint An api endpoint
+     * @return self
+     */
+    public static function stream($endpoint = self::ENDPOINT_ZEND)
+    {
+        return new static(new StreamService($endpoint));
+    }
+
+    /**
+     * Use an internal ClientService
+     *
+     * @param  string $endpoint An api endpoint
+     * @param  Client $client   An http client
+     * @return self
+     */
+    public static function client($endpoint = self::ENDPOINT_ZEND, Client $client)
+    {
+        return new static(new ClientService($endpoint, $client));
+    }
+
+    /**
      * Constructor.
      *
-     * @param string      $endpoint a remote service endpoint url
-     * @param Client|null $client   optional http client
+     * @param ServiceInterface $service A nested service
      */
-    public function __construct($endpoint = self::ENDPOINT_ZEND, Client $client = null)
+    public function __construct(ServiceInterface $service)
     {
-        if (!in_array($endpoint, [self::ENDPOINT_ZEND, self::ENDPOINT_GITHUB])) {
-            throw new InvalidEndpointException($endpoint);
+        if ($service instanceof self) {
+            throw new RecursionException("Nested service must not be an instance of " . __CLASS__);
         }
-        $this->endpoint = $endpoint;
-        $this->client   = $client;
+        if (! in_array($service->endpoint, [self::ENDPOINT_ZEND, self::ENDPOINT_GITHUB])) {
+            throw new InvalidEndpointException($service->endpoint);
+        }
+        $this->service = $service;
     }
 
     /**
@@ -73,27 +93,10 @@ final class FrameworkService extends AbstractService
      */
     protected function loadLatest()
     {
-        $response = $this->getService()->loadLatest();
-        if ($this->endpoint === self::ENDPOINT_GITHUB) {
+        $response = $this->service->loadLatest();
+        if ($this->service->endpoint === self::ENDPOINT_GITHUB) {
             $response = $this->parseGithubResponse($response);
         }
-
         return $response;
-    }
-
-    /**
-     * Lazy-initialize a nested service.
-     *
-     * @return \Zend\Version\Service\AbstractService
-     */
-    private function getService()
-    {
-        if (null === $this->service) {
-            $this->service = (null === $this->client)
-                ? new StreamService($this->endpoint)
-                : new ClientService($this->endpoint, $this->client);
-        }
-
-        return $this->service;
     }
 }
