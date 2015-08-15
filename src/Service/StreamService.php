@@ -20,17 +20,12 @@ class StreamService extends AbstractService
     /**
      * @var string
      */
-    const DEFAULT_USER_AGENT = 'Zend-Version';
+    const DEFAULT_AGENT_NAME = 'Zend-Version';
 
     /**
      * @var string
      */
     protected $userAgent;
-
-    /**
-     * @var string
-     */
-    protected $agentVersion;
 
     /**
      * Constructor.
@@ -39,14 +34,13 @@ class StreamService extends AbstractService
      * @param string $userAgent    A stream context user agent
      * @param string $agentVersion A user agent version
      */
-    public function __construct($endpoint, $userAgent = self::DEFAULT_USER_AGENT, $agentVersion = Version\CURRENT)
+    public function __construct($endpoint, $agentName = self::DEFAULT_AGENT_NAME, $agentVersion = Version\CURRENT)
     {
         if (false === ini_get('allow_url_fopen')) {
             throw new AllowUrlFOpenException();
         }
-        $this->endpoint     = (string) $endpoint;
-        $this->userAgent    = (string) $userAgent;
-        $this->agentVersion = (string) $agentVersion;
+        $this->endpoint  = (string) $endpoint;
+        $this->userAgent = sprintf('%s/%s', $agentName, $agentVersion);
     }
 
     /**
@@ -57,9 +51,8 @@ class StreamService extends AbstractService
     protected function loadLatest()
     {
         $context = stream_context_create([
-            'http' => ['user_agent' => sprintf('%s/%s', $this->userAgent, $this->agentVersion)],
+            'http' => ['user_agent' => $this->userAgent]
         ]);
-
         return file_get_contents($this->endpoint, false, $context) ?: null;
     }
 }
