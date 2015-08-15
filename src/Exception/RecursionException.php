@@ -11,6 +11,11 @@ namespace Zend\Version\Exception;
 
 use DomainException;
 
+/**
+ * Announces a recursion error.
+ *
+ * @see \Zend\Version\Service\FrameworkService::__construct()
+ */
 final class RecursionException extends DomainException
 {
 }
