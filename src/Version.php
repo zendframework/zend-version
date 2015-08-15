@@ -73,41 +73,57 @@ class Version
     /**
      * Is this a major version?
      *
+     * @param  int|null $major a major version number
      * @return bool
      */
-    public function isMajor()
+    public function isMajor($major = null)
     {
+        if (null !== $major) {
+            return $this->parts[0] == $major;
+        }
         return $this->parts[1] == '0' && $this->parts[2] == '0';
     }
 
     /**
      * Is this a minor version?
      *
+     * @param  int|null $minor a minor version number
      * @return bool
      */
-    public function isMinor()
+    public function isMinor($minor = null)
     {
+        if (null !== $minor) {
+            return $this->parts[1] == $minor;
+        }
         return $this->parts[1] != '0' && $this->parts[2] == '0';
     }
 
     /**
      * Is this a patch version?
      *
+     * @param  int|null $patch a patch number
      * @return bool
      */
-    public function isPatch()
+    public function isPatch($patch = null)
     {
+        if (null !== $patch) {
+            return $this->parts[2] == $patch;
+        }
         return $this->parts[2] != '0';
     }
 
     /**
      * Is there an extension?
      *
+     * @param  string|null $extension a version extension
      * @return bool
      */
-    public function hasExtension()
+    public function hasExtension($extension = null)
     {
-        return isset($this->parts[3]);
+        if (! isset($this->parts[3])) {
+            return false;
+        }
+        return ($extension !== null) ? $this->parts[3] === $extension : true;
     }
 
     /**

@@ -53,7 +53,7 @@ class VersionTest extends TestCase
     public function testIsMajorReturnsBool()
     {
         $version = new Version(self::TEST_VERSION_1);
-        $this->assertTrue($version->isMajor());
+        $this->assertTrue($version->isMajor(1));
 
         $version = new Version(self::TEST_VERSION_2);
         $this->assertFalse($version->isMajor());
@@ -65,13 +65,13 @@ class VersionTest extends TestCase
         $this->assertTrue($version->isMinor());
 
         $version = new Version(self::TEST_VERSION_3);
-        $this->assertFalse($version->isMinor());
+        $this->assertFalse($version->isMinor(5));
     }
 
     public function testIsPatchReturnsBool()
     {
         $version = new Version(self::TEST_VERSION_3);
-        $this->assertTrue($version->isPatch());
+        $this->assertTrue($version->isPatch(3));
 
         $version = new Version(self::TEST_VERSION_1);
         $this->assertFalse($version->isPatch());
@@ -80,7 +80,7 @@ class VersionTest extends TestCase
     public function testHasExtensionReturnsBool()
     {
         $version = new Version(self::TEST_VERSION_4);
-        $this->assertTrue($version->hasExtension());
+        $this->assertTrue($version->hasExtension('alpha'));
 
         $version = new Version(self::TEST_VERSION_1);
         $this->assertFalse($version->hasExtension());
