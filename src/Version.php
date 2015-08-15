@@ -118,7 +118,7 @@ class Version
      * @param  string $operator a comparison operator
      * @return bool
      */
-    public function compareTo($another, $operator = '>=')
+    public function compare($another, $operator = '>=')
     {
         return version_compare((string) $another, $this->version, strtolower($operator));
     }

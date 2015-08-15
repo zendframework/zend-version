@@ -86,9 +86,9 @@ class VersionTest extends TestCase
         $this->assertFalse($version->hasExtension());
     }
 
-    public function testCompareToReturnsBool()
+    public function testCompareReturnsBool()
     {
         $version = new Version(self::TEST_VERSION_1);
-        $this->assertFalse($version->compareTo(self::TEST_VERSION_4));
+        $this->assertFalse($version->compare(self::TEST_VERSION_4));
     }
 }
