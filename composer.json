@@ -17,7 +17,7 @@
         "zendframework/zend-json": "~2.5"
     },
     "suggest": {
-        "zendframework/zend-http": "Allows use of Zend\\Http\\Client to check version information",
+        "zendframework/zend-http": "Allows use of Zend\\Http\\Client to check version information"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
