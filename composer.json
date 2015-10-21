@@ -18,7 +18,6 @@
     },
     "suggest": {
         "zendframework/zend-http": "Allows use of Zend\\Http\\Client to check version information",
-        "zendframework/zend-json": "To check latest version hosted in GitHub"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
