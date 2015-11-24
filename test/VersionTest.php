@@ -27,7 +27,7 @@ class VersionTest extends TestCase
 
     public function testConstructorValidatesVersion()
     {
-        $this->setExpectedException("Zend\Version\Exception\InvalidFormatException");
+        $this->setExpectedException("Zend\Version\Exception\VersionException");
         $version = new Version(self::TEST_VERSION_5);
     }
 

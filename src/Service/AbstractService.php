@@ -9,7 +9,7 @@
 
 namespace Zend\Version\Service;
 
-use Zend\Version\Exception\InvalidFormatException;
+use Zend\Version\Exception\VersionException;
 use Zend\Version\Version;
 
 /**
@@ -51,7 +51,7 @@ abstract class AbstractService implements ServiceInterface
     public function isLatest($version)
     {
         if (!Version::validate($version)) {
-            throw new InvalidFormatException($version);
+            throw VersionException::invalidFormat($version);
         }
         if (!$latest = $this->getLatest()) {
             return true;

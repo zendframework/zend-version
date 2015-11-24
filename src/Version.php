@@ -45,7 +45,7 @@ class Version
     public function __construct($version)
     {
         if (!static::validate($version)) {
-            throw new Exception\InvalidFormatException($version);
+            throw Exception\VersionException::invalidFormat($version);
         }
         $this->version = strtolower($version);
         $this->parseVersionParts();

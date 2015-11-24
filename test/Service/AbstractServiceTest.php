@@ -29,7 +29,7 @@ class AbstractServiceTest extends TestCase
 
     public function testIsLatestValidatesVersion()
     {
-        $this->setExpectedException('Zend\Version\Exception\InvalidFormatException');
+        $this->setExpectedException('Zend\Version\Exception\VersionException');
         $service = $this->getMockForAbstractClass(self::CLASSNAME);
         $service->isLatest('foo');
     }

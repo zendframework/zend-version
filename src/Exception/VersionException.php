@@ -12,24 +12,18 @@ namespace Zend\Version\Exception;
 use DomainException;
 
 /**
- * Announces an invalid version format.
- *
- * @link http://semver.org
+ * Announces a version error.
  */
-class InvalidFormatException extends DomainException
+final class VersionException extends DomainException
 {
     /**
-     * @var string
-     */
-    const PATTERN = 'Invalid Format: [%s] is not a semantic version';
-
-    /**
-     * Constructor.
+     * Announces an invalid version format.
      *
      * @param string $version An invalid version string
+     * @link  http://semver.org
      */
-    public function __construct($version)
+    public static function invalidFormat($version)
     {
-        parent::__construct(sprintf(static::PATTERN, $version));
+        return new static(sprintf('Invalid Format: [%s] is not a semantic version', $version));
     }
 }
