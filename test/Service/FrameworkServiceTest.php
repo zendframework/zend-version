@@ -26,7 +26,7 @@ class FrameworkServiceTest extends TestCase
         $internal = $this->getMockForAbstractClass("Zend\Version\Service\ServiceInterface");
         $internal->endpoint = FrameworkService::ENDPOINT_GITHUB;
         $service = new FrameworkService($internal);
-        $this->setExpectedException("Zend\Version\Exception\RecursionException");
+        $this->setExpectedException("Zend\Version\Exception\NestedServiceException");
         $test = new FrameworkService($service);
     }
 

@@ -12,7 +12,7 @@ namespace Zend\Version\Service;
 use Zend\Http\Client;
 use Zend\Version;
 use Zend\Version\Exception\InvalidEndpointException;
-use Zend\Version\Exception\RecursionException;
+use Zend\Version\Exception\NestedServiceException;
 
 /**
  * Provides Zend Framework-specific version info.
@@ -65,7 +65,7 @@ final class FrameworkService extends AbstractService
     public function __construct(ServiceInterface $service)
     {
         if ($service instanceof self) {
-            throw new RecursionException("Nested service must not be an instance of " . __CLASS__);
+            throw NestedServiceException::recursion(__CLASS__);
         }
         if (! in_array($service->endpoint, [self::ENDPOINT_ZEND, self::ENDPOINT_GITHUB])) {
             throw new InvalidEndpointException($service->endpoint);
