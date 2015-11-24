@@ -14,22 +14,16 @@ use ErrorException;
 /**
  * Announces an error with the allow_url_fopen configuration setting.
  */
-class AllowUrlFOpenException extends ErrorException
+final class AllowUrlFOpenException extends ErrorException
 {
     /**
-     * @var string
-     */
-    const DEFAULT_MESSAGE = 'allow_url_fopen is not enabled';
-
-    /**
-     * Constructor.
+     * Announces allow_url_fopen is disabled.
      *
-     * @param string $message An error message
-     * @param int    $code    An error code
-     * @param int    $level   A severity level
+     * @param  int  $code An error code
+     * @return self
      */
-    public function __construct($message = self::DEFAULT_MESSAGE, $code = 0, $level = E_USER_WARNING)
+    public static function disabled($code = 0)
     {
-        parent::__construct($message, $code, $level);
+        return new static('allow_url_fopen is not enabled', $code, E_USER_WARNING);
     }
 }

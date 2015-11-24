@@ -37,7 +37,7 @@ class StreamService extends AbstractService
     public function __construct($endpoint, $agentName = self::DEFAULT_AGENT_NAME, $agentVersion = Version\CURRENT)
     {
         if (false === ini_get('allow_url_fopen')) {
-            throw new AllowUrlFOpenException();
+            throw AllowUrlFOpenException::disabled();
         }
         $this->endpoint  = (string) $endpoint;
         $this->userAgent = sprintf('%s/%s', $agentName, $agentVersion);

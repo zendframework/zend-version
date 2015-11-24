@@ -24,30 +24,18 @@ class AllowUrlFOpenExceptionTest extends TestCase
 
     public function testClassExtendsErrorException()
     {
-        $mock = $this->getMock('Zend\Version\Exception\AllowUrlFOpenException', [], [], '', false);
-        $this->assertInstanceOf('ErrorException', $mock);
+        $this->assertInstanceOf('ErrorException', new AllowUrlFOpenException());
     }
 
-    public function testClassHasDefaultMessage()
+    public function testDisabledMessage()
     {
-        $this->assertInternalType('string', AllowUrlFOpenException::DEFAULT_MESSAGE);
+        $exception = AllowUrlFOpenException::disabled();
+        $this->assertSame('allow_url_fopen is not enabled', $exception->getMessage());
     }
 
-    public function testMessageUsesDefaultMessage()
+    public function testDisabledSeverity()
     {
-        $subject = new AllowUrlFOpenException();
-        $this->assertSame(AllowUrlFOpenException::DEFAULT_MESSAGE, $subject->getMessage());
-    }
-
-    public function testGetCodeReturnsDefault()
-    {
-        $subject = new AllowUrlFOpenException();
-        $this->assertSame(0, $subject->getCode());
-    }
-
-    public function testGetSeverityReturnsUserWarning()
-    {
-        $subject = new AllowUrlFOpenException();
+        $subject = AllowUrlFOpenException::disabled();
         $this->assertSame(E_USER_WARNING, $subject->getSeverity());
     }
 }
