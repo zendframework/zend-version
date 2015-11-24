@@ -12,22 +12,17 @@ namespace Zend\Version\Exception;
 use InvalidArgumentException;
 
 /**
- * Announces an invalid service endpoint.
+ * Announces an endpoint error.
  */
-class InvalidEndpointException extends InvalidArgumentException
+final class EndpointException extends InvalidArgumentException
 {
     /**
-     * @var string
-     */
-    const PATTERN = 'Invalid service endpoint [%s]';
-
-    /**
-     * Constructor.
+     * Announces an invalid service endpoint.
      *
      * @param string $endpoint An invalid endpoint string
      */
-    public function __construct($endpoint)
+    public static function invalid($endpoint)
     {
-        parent::__construct(sprintf(static::PATTERN, $endpoint));
+        return new static(sprintf('Invalid service endpoint [%s]', $endpoint));
     }
 }

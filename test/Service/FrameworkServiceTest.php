@@ -32,7 +32,7 @@ class FrameworkServiceTest extends TestCase
 
     public function testConstructorValidatesEndpoint()
     {
-        $this->setExpectedException("Zend\Version\Exception\InvalidEndpointException");
+        $this->setExpectedException("Zend\Version\Exception\EndpointException");
         $service = FrameworkService::stream("foo");
     }
 

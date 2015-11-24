@@ -11,7 +11,7 @@ namespace Zend\Version\Service;
 
 use Zend\Http\Client;
 use Zend\Version;
-use Zend\Version\Exception\InvalidEndpointException;
+use Zend\Version\Exception\EndpointException;
 use Zend\Version\Exception\NestedServiceException;
 
 /**
@@ -68,7 +68,7 @@ final class FrameworkService extends AbstractService
             throw NestedServiceException::recursion(__CLASS__);
         }
         if (! in_array($service->endpoint, [self::ENDPOINT_ZEND, self::ENDPOINT_GITHUB])) {
-            throw new InvalidEndpointException($service->endpoint);
+            throw EndpointException::invalid($service->endpoint);
         }
         $this->service = $service;
     }

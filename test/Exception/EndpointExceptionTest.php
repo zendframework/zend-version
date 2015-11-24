@@ -10,34 +10,28 @@
 namespace ZendTest\Version\Exception;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Version\Exception\InvalidEndpointException;
+use Zend\Version\Exception\EndpointException;
 
 /**
  * @group Zend_Version
  */
-class InvalidEndpointExceptionTest extends TestCase
+class EndpointExceptionTest extends TestCase
 {
     public function testClassExists()
     {
-        $this->assertTrue(class_exists('Zend\Version\Exception\InvalidFormatException'));
+        $this->assertTrue(class_exists('Zend\Version\Exception\EndpointException'));
     }
 
     public function testClassExtendsInvalidArgumentException()
     {
-        $subject = new InvalidEndpointException('test');
+        $subject = new EndpointException('test');
         $this->assertInstanceOf('InvalidArgumentException', $subject);
     }
 
-    public function testClassHasPatternConstant()
+    public function testInvalidFormatsMessage()
     {
-        $this->assertInternalType('string', InvalidEndpointException::PATTERN);
-    }
-
-    public function testMessageUsesVersion()
-    {
-        $endpoint = 'bad';
-        $subject = new InvalidEndpointException($endpoint);
-        $message = sprintf(InvalidEndpointException::PATTERN, $endpoint);
+        $subject = EndpointException::invalid('bad');
+        $message = 'Invalid service endpoint [bad]';
         $this->assertSame($message, $subject->getMessage());
     }
 }
