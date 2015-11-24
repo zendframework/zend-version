@@ -23,6 +23,6 @@ final class EndpointException extends InvalidArgumentException
      */
     public static function invalid($endpoint)
     {
-        return new static(sprintf('Invalid service endpoint [%s]', $endpoint));
+        return new static("Invalid service endpoint [$endpoint]");
     }
 }
