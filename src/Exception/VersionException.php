@@ -19,11 +19,12 @@ final class VersionException extends DomainException
     /**
      * Announces an invalid version format.
      *
-     * @param string $version An invalid version string
-     * @link  http://semver.org
+     * @param  string $version An invalid version string
+     * @return self
+     * @link   http://semver.org
      */
     public static function invalidFormat($version)
     {
-        return new static(sprintf('Invalid Format: [%s] is not a semantic version', $version));
+        return new static("Invalid Format: [$version] is not a semantic version");
     }
 }
