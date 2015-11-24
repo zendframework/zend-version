@@ -50,9 +50,7 @@ class StreamService extends AbstractService
      */
     protected function loadLatest()
     {
-        $context = stream_context_create([
-            'http' => ['user_agent' => $this->userAgent]
-        ]);
+        $context = stream_context_create(['http' => ['user_agent' => $this->userAgent]]);
         return file_get_contents($this->endpoint, false, $context) ?: null;
     }
 }
