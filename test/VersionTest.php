@@ -86,9 +86,33 @@ class VersionTest extends TestCase
         $this->assertFalse($version->hasExtension());
     }
 
-    public function testCompareReturnsBool()
+    public function testEqualsReturnsBool()
     {
         $version = new Version(self::TEST_VERSION_1);
-        $this->assertFalse($version->compare(self::TEST_VERSION_4));
+        $this->assertFalse($version->equals(self::TEST_VERSION_4));
+    }
+
+    public function testIsGreaterThanReturnsBool()
+    {
+        $version = new Version(self::TEST_VERSION_1);
+        $this->assertTrue($version->isGreaterThan(self::TEST_VERSION_4));
+    }
+
+    public function testIsLessThanReturnsBool()
+    {
+        $version = new Version(self::TEST_VERSION_1);
+        $this->assertTrue($version->isLessThan(self::TEST_VERSION_2));
+    }
+
+    public function testIsGreaterThanOrEqualToReturnsBool()
+    {
+        $version = new Version(self::TEST_VERSION_2);
+        $this->assertTrue($version->isGreaterThanOrEqualTo(self::TEST_VERSION_3));
+    }
+
+    public function testIsLessThanOrEqualToReturnsBool()
+    {
+        $version = new Version(self::TEST_VERSION_1);
+        $this->assertTrue($version->isLessThanOrEqualTo(self::TEST_VERSION_3));
     }
 }

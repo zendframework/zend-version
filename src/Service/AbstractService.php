@@ -57,7 +57,7 @@ abstract class AbstractService implements ServiceInterface
             return true;
         }
 
-        return $latest->compare($version);
+        return $latest->isLessThanOrEqualTo($version);
     }
 
     /**

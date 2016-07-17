@@ -130,13 +130,41 @@ class Version
      * Compare another version.
      *
      * @link   http://php.net/manual/function.version-compare.php
-     * @param  string $another  another version to compare
-     * @param  string $operator a comparison operator
+     * @param  string|self $another  another version to compare
+     * @param  string      $operator a comparison operator
      * @return bool
      */
-    public function compare($another, $operator = '>=')
+    private function compare($another, $operator)
     {
-        return version_compare((string) $another, $this->version, strtolower($operator));
+        if (! $another instanceof self) {
+            $another = new static($another);
+        }
+        return version_compare($this->version, $another->version, $operator);
+    }
+
+    public function equals($another)
+    {
+        return $this->compare($another, '=');
+    }
+
+    public function isGreaterThan($another)
+    {
+        return $this->compare($another, '>');
+    }
+
+    public function isGreaterThanOrEqualTo($another)
+    {
+        return $this->compare($another, '>=');
+    }
+
+    public function isLessThan($another)
+    {
+        return $this->compare($another, '<');
+    }
+
+    public function isLessThanOrEqualTo($another)
+    {
+        return $this->compare($another, '<=');
     }
 
     /**
