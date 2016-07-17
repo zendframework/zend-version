@@ -13,3 +13,4 @@ composer.lock
 coveralls-upload.json
 phpunit.xml
 vendor
+/build/
