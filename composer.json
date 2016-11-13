@@ -36,5 +36,16 @@
         "phpunit/PHPUnit": "~4.0",
         "zendframework/zend-http": "~2.5",
         "zendframework/zend-coding-standard": "~1.0.0"
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@test"
+        ],
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit --colors=always",
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+        "upload-coverage": "coveralls -v"
     }
 }
