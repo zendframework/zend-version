@@ -23,11 +23,29 @@ class VersionTest extends \PHPUnit_Framework_TestCase
      */
     public function testVersionCompare()
     {
+        $rels = [
+            'dev',
+            'pr',
+            'PR',
+            'alpha',
+            'a1',
+            'a2',
+            'beta',
+            'b1',
+            'b2',
+            'RC',
+            'RC1',
+            'RC2',
+            'RC3',
+            '',
+            'pl1',
+            'PL1',
+        ];
         $expect = -1;
-        for ($i=0; $i < 2; $i++) {
-            for ($j=0; $j < 12; $j++) {
-                for ($k=0; $k < 20; $k++) {
-                    foreach (['dev', 'pr', 'PR', 'alpha', 'a1', 'a2', 'beta', 'b1', 'b2', 'RC', 'RC1', 'RC2', 'RC3', '', 'pl1', 'PL1'] as $rel) {
+        for ($i = 0; $i < 2; $i++) {
+            for ($j = 0; $j < 12; $j++) {
+                for ($k = 0; $k < 20; $k++) {
+                    foreach ($rels as $rel) {
                         $ver = "$i.$j.$k$rel";
                         $normalizedVersion = strtolower(Version::VERSION);
                         if (strtolower($ver) === $normalizedVersion
@@ -44,7 +62,8 @@ class VersionTest extends \PHPUnit_Framework_TestCase
                                 $expect,
                                 "For version '$ver' and Zend\Version\Version::VERSION = '"
                                 . Version::VERSION . "': result=" . (Version::compareVersion($ver))
-                                . ', but expected ' . $expect);
+                                . ', but expected ' . $expect
+                            );
                         }
                     }
                 }
@@ -60,10 +79,10 @@ class VersionTest extends \PHPUnit_Framework_TestCase
      */
     public function testFetchLatestVersion()
     {
-        if (!getenv('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
             $this->markTestSkipped('Version online tests are not enabled');
         }
-        if (!extension_loaded('openssl')) {
+        if (! extension_loaded('openssl')) {
             $this->markTestSkipped('This test requires openssl extension to be enabled in PHP');
         }
 
@@ -79,10 +98,10 @@ class VersionTest extends \PHPUnit_Framework_TestCase
      */
     public function testFetchLatestGithubVersion()
     {
-        if (!getenv('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
             $this->markTestSkipped('Version online tests are not enabled');
         }
-        if (!extension_loaded('openssl')) {
+        if (! extension_loaded('openssl')) {
             $this->markTestSkipped('This test requires openssl extension to be enabled in PHP');
         }
 
@@ -98,7 +117,7 @@ class VersionTest extends \PHPUnit_Framework_TestCase
      */
     public function testFetchLatestVersionWarnsIfAllowUrlFopenIsDisabled()
     {
-        if (!getenv('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
             $this->markTestSkipped('Version online tests are not enabled');
         }
         if (ini_get('allow_url_fopen')) {
@@ -117,7 +136,7 @@ class VersionTest extends \PHPUnit_Framework_TestCase
      */
     public function testFetchLatestVersionWarnsIfBadServiceIsPassed()
     {
-        if (!getenv('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
             $this->markTestSkipped('Version online tests are not enabled');
         }
 
@@ -133,10 +152,10 @@ class VersionTest extends \PHPUnit_Framework_TestCase
      */
     public function testFetchLatestVersionUsesSuppliedZendHttpClient()
     {
-        if (!getenv('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
             $this->markTestSkipped('Version online tests are not enabled');
         }
-        if (!extension_loaded('openssl')) {
+        if (! extension_loaded('openssl')) {
             $this->markTestSkipped('This test requires openssl extension to be enabled in PHP');
         }
 
@@ -161,10 +180,10 @@ class VersionTest extends \PHPUnit_Framework_TestCase
      */
     public function testFetchLatestVersionDoesNotThrowZendHttpClientException()
     {
-        if (!getenv('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_VERSION_ONLINE_ENABLED')) {
             $this->markTestSkipped('Version online tests are not enabled');
         }
-        if (!extension_loaded('openssl')) {
+        if (! extension_loaded('openssl')) {
             $this->markTestSkipped('This test requires openssl extension to be enabled in PHP');
         }
 
