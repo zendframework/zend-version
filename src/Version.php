@@ -84,7 +84,7 @@ final class Version
 
         self::$latestVersion = 'not available';
 
-        if (null === $httpClient && !ini_get('allow_url_fopen')) {
+        if (null === $httpClient && ! ini_get('allow_url_fopen')) {
             trigger_error(
                 sprintf(
                     'allow_url_fopen is not set, and no Zend\Http\Client ' .
@@ -147,7 +147,7 @@ final class Version
             return false;
         }
 
-        if (!$response->isSuccess()) {
+        if (! $response->isSuccess()) {
             return false;
         }
 
@@ -180,7 +180,7 @@ final class Version
             $apiResponse = self::getApiResponse($httpClient);
         }
 
-        if (!$apiResponse) {
+        if (! $apiResponse) {
             return false;
         }
 
@@ -217,7 +217,7 @@ final class Version
             $apiResponse = self::getApiResponse($httpClient);
         }
 
-        if (!$apiResponse) {
+        if (! $apiResponse) {
             return false;
         }
 
