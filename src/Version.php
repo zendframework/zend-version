@@ -1,10 +1,8 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-version for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-version/blob/master/LICENSE.md New BSD License
  */
 
 namespace Zend\Version;
@@ -84,7 +82,7 @@ final class Version
 
         self::$latestVersion = 'not available';
 
-        if (null === $httpClient && !ini_get('allow_url_fopen')) {
+        if (null === $httpClient && ! ini_get('allow_url_fopen')) {
             trigger_error(
                 sprintf(
                     'allow_url_fopen is not set, and no Zend\Http\Client ' .
@@ -147,7 +145,7 @@ final class Version
             return false;
         }
 
-        if (!$response->isSuccess()) {
+        if (! $response->isSuccess()) {
             return false;
         }
 
@@ -180,7 +178,7 @@ final class Version
             $apiResponse = self::getApiResponse($httpClient);
         }
 
-        if (!$apiResponse) {
+        if (! $apiResponse) {
             return false;
         }
 
@@ -217,7 +215,7 @@ final class Version
             $apiResponse = self::getApiResponse($httpClient);
         }
 
-        if (!$apiResponse) {
+        if (! $apiResponse) {
             return false;
         }
 
