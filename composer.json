@@ -1,30 +1,34 @@
 {
     "name": "zendframework/zend-version",
-    "description": " ",
+    "description": "Provides utilities to check and compare package versions",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf2",
+        "zf",
+        "zendframework",
         "version"
     ],
-    "homepage": "https://github.com/zendframework/zend-version",
-    "autoload": {
-        "psr-4": {
-            "Zend\\Version\\": "src/"
-        }
+    "support": {
+        "issues": "https://github.com/zendframework/zend-version/issues",
+        "source": "https://github.com/zendframework/zend-version",
+        "rss": "https://github.com/zendframework/zend-version/releases.atom",
+        "chat": "https://zendframework-slack.herokuapp.com",
+        "forum": "https://discourse.zendframework.com/c/questions/components"
     },
     "require": {
         "php": "^5.6 || ^7.0",
         "zendframework/zend-json": "~2.5"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.5",
+        "zendframework/zend-http": "~2.5",
+        "zendframework/zend-coding-standard": "~1.0.0"
+    },
     "suggest": {
         "zendframework/zend-http": "Allows use of Zend\\Http\\Client to check version information"
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.5-dev",
-            "dev-develop": "2.6-dev"
+    "autoload": {
+        "psr-4": {
+            "Zend\\Version\\": "src/"
         }
     },
     "autoload-dev": {
@@ -35,10 +39,14 @@
             "ZendTest\\Version\\": "test/"
         }
     },
-    "require-dev": {
-        "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.5",
-        "zendframework/zend-http": "~2.5",
-        "zendframework/zend-coding-standard": "~1.0.0"
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.5.x-dev",
+            "dev-develop": "2.6.x-dev"
+        }
     },
     "scripts": {
         "check": [
