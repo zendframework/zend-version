@@ -28,12 +28,15 @@
         }
     },
     "autoload-dev": {
+        "files": [
+            "test/autoload.php"
+        ],
         "psr-4": {
             "ZendTest\\Version\\": "test/"
         }
     },
     "require-dev": {
-        "phpunit/PHPUnit": "~4.0",
+        "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.5",
         "zendframework/zend-http": "~2.5",
         "zendframework/zend-coding-standard": "~1.0.0"
     },

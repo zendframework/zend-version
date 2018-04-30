@@ -10,6 +10,7 @@ env:
   global:
     - COMPOSER_ARGS="--no-interaction"
     - COVERAGE_DEPS="php-coveralls/php-coveralls"
+    - TESTS_ZEND_VERSION_ONLINE_ENABLED=true
 
 matrix:
   include:

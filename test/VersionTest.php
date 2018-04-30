@@ -9,13 +9,15 @@
 
 namespace ZendTest\Version;
 
+use PHPUnit\Framework\Error\Warning;
+use PHPUnit\Framework\TestCase;
 use Zend\Http;
 use Zend\Version\Version;
 
 /**
  * @group      Zend_Version
  */
-class VersionTest extends \PHPUnit_Framework_TestCase
+class VersionTest extends TestCase
 {
     /**
      * Tests that version_compare() and its "proxy"
@@ -124,7 +126,7 @@ class VersionTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Test only works with allow_url_fopen disabled');
         }
 
-        $this->setExpectedException('PHPUnit_Framework_Error_Warning');
+        $this->expectException(Warning::class);
 
         Version::getLatest(Version::VERSION_SERVICE_ZEND);
     }
@@ -140,7 +142,7 @@ class VersionTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('Version online tests are not enabled');
         }
 
-        $this->setExpectedException('PHPUnit_Framework_Error_Warning');
+        $this->expectException(Warning::class);
 
         Version::getLatest('bogus service');
     }
